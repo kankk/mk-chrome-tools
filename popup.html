@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,27 @@
   <title>Chrome插件</title>
   <link rel="stylesheet" href="/css/popup.css">
 </head>
+
 <body>
-  <p class="title">Chrome工具包</p>
   <div class="content">
-    <div class="prettify-title">网页美化</div>
-    <div class="prettify-item">
-      <label for="juejin">掘金<input type="checkbox" id="juejin" /></label>
+    <div id="prettify" class="content-wrap">
+      <div class="prettify-title content-title">网页布局简化</div>
+      <div class="prettify-item content-item">
+        <label for="juejin">
+          <span>掘金</span>
+          <input type="checkbox" id="juejin" />
+        </label>
+      </div>
+      <div class="prettify-item content-item">
+        <label for="zhihu">
+          <span>知乎</span>
+          <input type="checkbox" id="zhihu" />
+        </label>
+      </div>
     </div>
   </div>
+  <script src="/js/jquery-3.3.1.min.js"></script>
+  <script src="/js/popup.js"></script>
 </body>
+
 </html>
