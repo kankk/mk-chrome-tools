@@ -88,13 +88,35 @@ function run() {
   function prettifyZhihu() {
     $('.AppHeader').remove(); // 移除悬浮头部
     $('.GlobalSideBar').remove(); // 移除右侧广告栏
-    $('.Topstory-mainColumn').css('width', '100%'); // 主题内容设置为100%宽度
+    $('.Topstory-mainColumn').css('width', '100%'); // 主体内容设置为100%宽度
     setTimeout(() => {
       $('button[data-tooltip="建议反馈"]').each(function () {
         const $this = $(this);
         $this.parent().remove();
       })
     }, 3000);
+  }
+
+  function prettifyCSDNArticle() {
+    $('#csdn-toolbar').remove(); // 移除头部
+    $('.article_info_click').remove(); // 移除头部'更多'按钮
+    $('aside').remove(); // 移除侧边栏
+    $('.pulllog-box').remove(); // 移除底部蒙层
+    $('.recommend-right').remove(); // 移除右侧推荐栏
+    $('[id^=dmp_ad]').remove(); // 移除广告
+    $('.recommend-box').remove(); // 移除推荐文章栏目
+    $('.indexSuperise').remove(); // 移除超级广告
+    $('.meau-gotop-box').remove(); // 移除右下角悬浮栏
+    $('.tool-box').remove(); // 移除工具栏
+    $('#mainBox').css({
+      'display': 'flex',
+      'justify-content': 'center'
+    }); // 主体内容设置样式
+    $('#mainBox main').css('width', '80%'); // 主体内容设置为100%宽度
+    $('iframe').remove(); // 移除所有iframe
+    detectPage(() => $('#btn-readmore').length > 0, () => {
+      $('#btn-readmore')[0].click();
+    });
   }
 
   if (currentHostname === 'juejin.im') { // 掘金
@@ -112,6 +134,12 @@ function run() {
       prettifyZhihuArticle();
     } else { // 知乎其他页面
       prettifyZhihu();
+    }
+  } else if (currentHostname === 'blog.csdn.net') { // csdn
+    localType = 'csdn';
+    if (!localPrettifyConfig['csdn']) return;
+    if (/\/article\/details\//.test(currentPathname)) { // csdn文章页
+      prettifyCSDNArticle();
     }
   }
 }
