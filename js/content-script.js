@@ -59,11 +59,29 @@ function run() {
     $('.article-suspended-panel').remove();
   }
 
+  function prettifyJuejinBook() {
+    detectPage(() => $('.book-content__header').length > 0, () => {
+      $('.book-content__header').remove();
+      $('.book-summary').hide();
+      $('.book-content').css('margin-left', '0px');
+      $('.book-body').css('padding-top', '0px');
+    });
+
+    window.onkeydown = function (e) {
+      if (e.keyCode == 16) {  // shift
+        console.log(e.keyCode);
+        $('.book-summary').toggle();
+      }
+    }
+  }
+
   function prettifyJuejin() {
     // 移除右侧边栏
     detectPage(() => $('.index-aside').length > 0, () => {
       $('.index-aside').remove();
       $('.user-action-nav').remove();
+      $('.main-header-box').remove();
+      $('.view-nav').remove();
       $('.meiqia-btn').remove();
       $('.timeline-entry-list').css('width', '100%');
       $('.user-action-nav').css('width', '100%');
@@ -124,6 +142,8 @@ function run() {
     if (!localPrettifyConfig['juejin']) return;
     if (/^\/post\//.test(currentPathname)) { // 掘金文章页
       prettifyJuejinArticle();
+    } else if (/^\/book\//.test(currentPathname)) { // 掘金小册页
+      prettifyJuejinBook();
     } else { // 掘金其他页面
       prettifyJuejin();
     }
