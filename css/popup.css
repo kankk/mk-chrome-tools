@@ -35,3 +35,19 @@ body {
   margin-left: 12px;
   transform: scale(1.2);
 }
+
+#tools-url-md {
+  width: 100%;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tools-url-md-text {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #333;
+  padding: 2px;
+  box-sizing: border-box;
+}

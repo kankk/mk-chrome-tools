@@ -13,6 +13,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'reload') {
       window.location.reload();
     }
+  } else if (request.type === 'url-md') {
+    sendResponse({
+      title: encodeURIComponent(document.title),
+      href: encodeURIComponent(window.location.href)
+    });
   }
 });
 
@@ -65,11 +70,11 @@ function run() {
       $('.book-summary').hide();
       $('.book-content').css('margin-left', '0px');
       $('.book-body').css('padding-top', '0px');
+      $('.book-handle').remove();
     });
 
     window.onkeydown = function (e) {
       if (e.keyCode == 16) {  // shift
-        console.log(e.keyCode);
         $('.book-summary').toggle();
       }
     }

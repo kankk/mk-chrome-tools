@@ -38,4 +38,18 @@ $('#prettify').find('input[type=checkbox]').each(function () {
       action: 'reload'
     })
   });
-})
+});
+
+$('#tools').find('#tools-url-md').on('click', function(e) {
+  sendMessageToContentScript({
+    type: 'url-md',
+    action: 'fetch'
+  }, function(res) {
+    console.log(res);
+    const resultString = `* [${decodeURIComponent(res.title)}](${decodeURIComponent(res.href)})`;
+    const $resultInput = $('#tools').find('#tools-url-md-text');
+    $resultInput.val(resultString);
+    $resultInput.select();
+    document.execCommand('Copy');
+  })
+});
